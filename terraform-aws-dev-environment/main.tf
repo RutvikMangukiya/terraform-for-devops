@@ -64,5 +64,9 @@ resource "aws_security_group" "rut_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
 
+resource "aws_key_pair" "rut_auth" {
+  key_name   = "rutkey"
+  public_key = file("~/.ssh/rutkey.pub")
 }
