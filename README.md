@@ -153,6 +153,13 @@ terraform apply 2>&1 | tee debug.log  # Save logs
 
 ---
 
+# Terraform Functions - Complete Guide
+Terraform functions are versatile tools for data manipulation and transformation in your configurations. They allow for operations like string formatting, arithmetic calculations, and managing lists and maps.
+
+By using these functions, you can create dynamic and maintainable infrastructure code that adheres to the DRY (Don’t Repeat Yourself) principle, simplifying the provisioning and management of your resources.
+
+Here is the reference: 
+
 ## Projects
 
 
