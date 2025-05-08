@@ -9,6 +9,7 @@ output "city_greetings" {
 }
 
 # Output: ["Welcome to New York!", "Welcome to Los Angeles!", "Welcome to Chicago!"]
+####################################################################################
 
 # 2. Formatting a List on Integers 
 
@@ -21,6 +22,7 @@ output "formatted_scores" {
 }
 
 # Output: ["Score: 95", "Score: 85", "Score: 75"]
+####################################################################################
 
 # 3. Formatting a List of Floats
 
@@ -33,6 +35,7 @@ output "formatted_percentages" {
 }
 
 # Output: ["Percentage: 87.5%", "Percentage: 92.3%", "Percentage: 65.8%"]
+####################################################################################
 
 # 4. Using Automatic Formatting with %v in Lists
 
