@@ -31,7 +31,7 @@ output "flattened_result" {
 # 3. Flattening Multiple Levels of Nesting
 
 variable "deep_nested_list" {
-  default = [[[1,2], [-1,-2]], [3, 4], [5]]
+  default = [[[1, 2], [-1, -2]], [3, 4], [5]]
 }
 
 output "flat_deep_list" {
