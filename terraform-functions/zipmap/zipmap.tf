@@ -19,6 +19,7 @@ output "person_map" {
 # }
 
 # The zipmap function combines keys and values into a map.
+#############################################################################################
 
 # 2. Handling Lists of Different Lengths
 # If the keys list is longer than the values list, zipmap fills the missing values with null.
@@ -49,6 +50,7 @@ output "mismatched_zipmap" {
 # }
 
 # The additional keys are paired with null values.
+#############################################################################################
 
 # 3. Using zipmap with Computed Values
 
