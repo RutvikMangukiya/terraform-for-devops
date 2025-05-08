@@ -11,6 +11,7 @@ output "fruits_list" {
 # Output: ["apple", "orange", "banana"]
 
 # The split function converts the comma-separated string into a list of fruits.
+####################################################################################################
 
 # 2. Splitting a String with Spaces
 
@@ -25,6 +26,7 @@ output "words_list" {
 # Output: ["Terraform", "makes", "infrastructure", "simple"]
 
 # Here, the split function breaks the sentence into individual words using a space as the delimiter.
+####################################################################################################
 
 # 3. Splitting with a Complex Delimiter
 
