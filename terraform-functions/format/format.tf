@@ -13,7 +13,7 @@ output "formatted_name" {
 }
 
 # Output: "Full Name: Eren Mikasa"
-
+###################################################################
 
 # 2. Formatting Integers
 
@@ -26,7 +26,7 @@ output "formatted_age" {
 }
 
 # Output: "Age: 30 years"
-
+###################################################################
 
 # 3. Formatting floats
 
@@ -39,6 +39,7 @@ output "formatted_price" {
 }
 
 # Output: "Total Price: 25.68 USD"
+###################################################################
 
 # 4. Boolean Values
 
@@ -51,6 +52,7 @@ output "status_message" {
 }
 
 # Output: "Status: true"
+###################################################################
 
 # 5. Using Automatic Formatting with %v
 
