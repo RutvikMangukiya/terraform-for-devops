@@ -26,6 +26,7 @@ output "final_config" {
 # }
 
 # The merge function combines default_config and override_config, with override_config taking precedence in case of conflicting keys.
+##############################################################################################################################################
 
 # 2. Merging Multiple Maps
 
@@ -63,6 +64,7 @@ output "combined_map" {
 # }
 
 # The merge function combines all three maps, with later maps (map2 and map3) taking precedence over earlier ones in case of overlapping keys.
+##############################################################################################################################################
 
 # 3. Using merge with Nested Maps
 
