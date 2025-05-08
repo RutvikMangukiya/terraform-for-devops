@@ -11,6 +11,7 @@ output "sliced_list" {
 # Output: sliced_list = [20, 30]
 
 # The slice function extracts elements from index 1 to 3 (excluding 3).
+#######################################################################
 
 # 2. Slicing to the End of a List
 
