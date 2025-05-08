@@ -1,11 +1,11 @@
 # 1. Formatting a List of Strings
 
 variable "cities" {
-    default = ["New York", "Los Angles", "Chicago"]
+  default = ["New York", "Los Angles", "Chicago"]
 }
 
 output "city_greetings" {
-    value = formatlist("Welcome to %s!", var.cities)
+  value = formatlist("Welcome to %s!", var.cities)
 }
 
 # Output: ["Welcome to New York!", "Welcome to Los Angeles!", "Welcome to Chicago!"]
@@ -14,11 +14,11 @@ output "city_greetings" {
 # 2. Formatting a List on Integers 
 
 variable "scores" {
-    default = [95, 85, 75]
+  default = [95, 85, 75]
 }
 
 output "formatted_scores" {
-    value = formatlist("Score: %d", var.scores)
+  value = formatlist("Score: %d", var.scores)
 }
 
 # Output: ["Score: 95", "Score: 85", "Score: 75"]
