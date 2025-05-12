@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "s3_trigger_eventbridge" {
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = aws_s3_bucket.this.id
+  bucket = aws_s3_bucket.s3_trigger_eventbridge.id
   eventbridge = true
 }
 
@@ -71,6 +71,16 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
 
 # Lambda Function------------------------------------------------------------------------
+
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+
+  source_file = "${path.module}/lambda-code/lambda.py"
+
+  output_path = "${path.module}/lambda.zip"
+}
+
+
 resource "aws_lambda_function" "lambda" {
   function_name    = var.lambda_name
   architectures    = var.architectures
@@ -81,7 +91,7 @@ resource "aws_lambda_function" "lambda" {
   filename         = var.lambda_zip_path
   memory_size      = var.memory_size
   source_code_hash = filebase64sha256(var.lambda_zip_path)
-  depends_on       = [aws_iam_role.s3_eventbridge_role]
+  depends_on       = [aws_iam_role.lambda_exec]
 }
 
 resource "aws_cloudwatch_log_group" "lambda_logs" {

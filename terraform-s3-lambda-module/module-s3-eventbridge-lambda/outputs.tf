@@ -12,3 +12,11 @@ output "event_rule_name" {
   description = "Name of the EventBridge rule"
   value       = aws_cloudwatch_event_rule.s3_put_rule.name
 }
+
+output "lambda_zip_path" {
+  value = data.archive_file.lambda_zip.output_path
+}
+
+output "module_path" {
+  value = path.module
+}
