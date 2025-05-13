@@ -15,7 +15,7 @@ module "s3_eventbridge_lambda" {
   lambda_name     = "s3-eventbridge-lambda"
   architectures   = ["arm64"]
   description     = "This is lambda function triggered from event-bridge rule"
-  lambda_handler  = "s3_eventbridge_lambda.lambda_handler"
+  lambda_handler  = "lambda.lambda_handler"
   lambda_runtime  = "python3.10"
   lambda_zip_path = "/home/rutvik.mangukiya@iqinfinite.in/GitHub/terraform-for-devops/terraform-s3-lambda-module/lambda-code/lambda.zip"
   memory_size     = 256
