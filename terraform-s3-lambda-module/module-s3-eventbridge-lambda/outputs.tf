@@ -17,7 +17,3 @@ output "lambda_zip_path" {
   value = aws_lambda_function.lambda.filename
   description = "path to zip code"
 }
-
-output "module_path" {
-  value = path.module
-}
