@@ -17,6 +17,17 @@ module "s3_eventbridge_lambda" {
   description     = "This is lambda function triggered from event-bridge rule"
   lambda_handler  = "s3_eventbridge_lambda.lambda_handler"
   lambda_runtime  = "python3.10"
-  lambda_zip_path = module.s3_eventbridge_lambda.lambda_zip_path
+  lambda_zip_path = "/home/rutvik.mangukiya@iqinfinite.in/GitHub/terraform-for-devops/terraform-s3-lambda-module/lambda-code/lambda.zip"
   memory_size     = 256
+}
+
+
+
+
+# Demo output values 
+output "bucket" {
+  value = module.s3_eventbridge_lambda.bucket_name
+}
+output "path" {
+  value = module.s3_eventbridge_lambda.lambda_zip_path
 }

@@ -14,7 +14,8 @@ output "event_rule_name" {
 }
 
 output "lambda_zip_path" {
-  value = data.archive_file.lambda_zip.output_path
+  value = aws_lambda_function.lambda.filename
+  description = "path to zip code"
 }
 
 output "module_path" {
