@@ -1,7 +1,7 @@
 # 1. Basic One Usage
 
 variable "single_value" {
-  default = "only_value"
+  default = [only_value]
 }
 
 output "exactly_one_non_null" {
