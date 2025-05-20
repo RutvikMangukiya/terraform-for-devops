@@ -72,7 +72,7 @@ resource "aws_rds_cluster" "aurora-cluster" {
 
 # DB subnet group for RDS 
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "db-subnet-group"
+  name       = "primary-db-subnet-group"
   subnet_ids = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id]
 }
 
@@ -108,13 +108,12 @@ resource "aws_rds_cluster" "recovery-aurora-cluster" {
   lifecycle {
     create_before_destroy = true
   }
-
 }
 
 # DB subnet group for RDS 
 resource "aws_db_subnet_group" "recovery_db_subnet_group" {
   provider   = aws.backup
-  name       = "db-subnet-group"
+  name       = "recovery-db-subnet-group"
   subnet_ids = [aws_subnet.recovery_public_subnet3.id, aws_subnet.recovery_public_subnet4.id]
 }
 
@@ -124,5 +123,5 @@ resource "aws_rds_cluster_instance" "recovery-aurora-instance" {
   cluster_identifier   = aws_rds_cluster.recovery-aurora-cluster.cluster_identifier
   engine               = aws_rds_cluster.recovery-aurora-cluster.engine
   instance_class       = var.db_instance_type
-  db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
+  db_subnet_group_name = aws_db_subnet_group.recovery_db_subnet_group.name
 }
