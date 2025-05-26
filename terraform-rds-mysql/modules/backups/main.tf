@@ -80,7 +80,7 @@ data "aws_iam_policy_document" "kms_policy" {
 }
 
 resource "aws_rds_export_task" "snapshot_export" {
-  export_task_identifier = "${var.cluster_identifier}-export"
+  export_task_identifier = "${var.cluster_identifier}-export-${formatdate("YYYYMMDDhhmmss", timestamp())}"
   source_arn            = aws_db_cluster_snapshot.manual_snapshot.db_cluster_snapshot_arn
   s3_bucket_name        = aws_s3_bucket.backup_bucket.id
   iam_role_arn          = aws_iam_role.rds_snapshot_export_role.arn
