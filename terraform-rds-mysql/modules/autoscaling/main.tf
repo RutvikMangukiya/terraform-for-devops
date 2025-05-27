@@ -17,7 +17,7 @@ resource "aws_lambda_function" "rds_scaling" {
   filename      = "${path.module}/lambda/rds_autoscaling.zip"
   function_name = "rds_replica_scaling"
   role          = aws_iam_role.lambda_exec.arn
-  handler       = "rds_scaling.lambda_handler"
+  handler       = "rds-autoscaling.lambda_handler"
   runtime       = "python3.8"
   timeout       = 30
   # Ensure the zip is created before Lambda deployment
@@ -78,13 +78,13 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 resource "aws_cloudwatch_event_rule" "scale_up" {
   name                = "rds_scale_up_business_hours"
   description         = "Scale RDS replica up at 8 AM UTC"
-  schedule_expression = "cron(30 3 ? * MON-FRI *)"  # 8 AM UTC, Mon-Fri
+  schedule_expression = "cron(0 6 ? * MON-FRI *)"  # 6 AM UTC = 11.30 AM IST, Mon-Fri
 }
 
 resource "aws_cloudwatch_event_rule" "scale_down" {
   name                = "rds_scale_down_off_hours"
   description         = "Scale RDS replica down at 6 PM UTC"
-  schedule_expression = "cron(30 12 ? * MON-FRI *)"  # 12:30 PM UTC = 6:00 PM IST
+  schedule_expression = "cron(0 15 ? * MON-FRI *)"  # 3:00 PM UTC = 8:30 PM IST
 }
 
 # Trigger Lambda from CloudWatch
