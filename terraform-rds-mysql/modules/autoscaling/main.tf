@@ -25,9 +25,13 @@ resource "aws_lambda_function" "rds_scaling" {
 
   environment {
     variables = {
-      REPLICA_ID             = var.replica_identifier
-      BUSINESS_HOURS_CLASS   = var.business_hours_instance_class
-      OFF_HOURS_CLASS        = var.off_hours_instance_class
+      aws_region_name        = var.aws_region_name
+      down_instance_class    = var.down_instance_class
+      instance_identifier    = var.replica_identifier                   # Writer instance identifier
+      up_instance_class      = var.business_hours_instance_class         # Instance class during business hours
+      # REPLICA_ID             = var.replica_identifier
+      # BUSINESS_HOURS_CLASS   = var.business_hours_instance_class
+      # OFF_HOURS_CLASS        = var.off_hours_instance_class
     }
   }
 }
@@ -58,9 +62,10 @@ resource "aws_iam_role_policy" "lambda_rds_aurora" {
     Statement = [
       {
         Action = [
-          "rds:ModifyDBClusterInstance",
-          "rds:DescribeDBClusterInstances",
-          "rds:DescribeDBClusters"
+          "rds:ModifyDBInstance",
+          "rds:DescribeDBInstances",
+          "rds:DescribeDBClusters",
+          "rds:ListTagsForResource"
         ],
         Effect   = "Allow",
         Resource = "*"
@@ -68,6 +73,26 @@ resource "aws_iam_role_policy" "lambda_rds_aurora" {
     ]
   })
 }
+
+# resource "aws_iam_role_policy" "lambda_rds_aurora" {
+#   name = "lambda_rds_aurora_policy"
+#   role = aws_iam_role.lambda_exec.name
+
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [
+#       {
+#         Action = [
+#           "rds:ModifyDBClusterInstance",
+#           "rds:DescribeDBClusterInstances",
+#           "rds:DescribeDBClusters"
+#         ],
+#         Effect   = "Allow",
+#         Resource = "*"
+#       }
+#     ]
+#   })
+# }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_exec.name
@@ -93,7 +118,7 @@ resource "aws_cloudwatch_event_target" "scale_up" {
   target_id = "lambda"
   arn       = aws_lambda_function.rds_scaling.arn
 
-  input = jsonencode({ action = "scale_up" })
+  input = jsonencode({ "resource": "rds", "activity": "scale up" })
 }
 
 resource "aws_cloudwatch_event_target" "scale_down" {
@@ -101,7 +126,7 @@ resource "aws_cloudwatch_event_target" "scale_down" {
   target_id = "lambda"
   arn       = aws_lambda_function.rds_scaling.arn
 
-  input = jsonencode({ action = "scale_down" })
+  input = jsonencode({ "resource": "rds", "activity": "scale down" })
 }
 
 # Lambda Permissions

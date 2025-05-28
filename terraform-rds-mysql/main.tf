@@ -56,9 +56,9 @@ module "dns" {
 
 module "autoscaling" {
   source                        = "./modules/autoscaling"
-  replica_identifier            = module.rds.reader_instance_id                                       # Target the reader
-  business_hours_instance_class = "db.r5.large"                                            # Scale up during day
-  off_hours_instance_class      = "db.r5.small"                                            # Scale down at night
+  replica_identifier            = module.rds.reader_instance_id # Target the reader
+  business_hours_instance_class = "db.r5.large"                 # Scale up during day
+  off_hours_instance_class      = "db.r5.small"                 # Scale down at night
 }
 
 resource "aws_security_group" "rds_sg" {
